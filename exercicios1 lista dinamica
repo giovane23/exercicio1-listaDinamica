@@ -1,0 +1,109 @@
+class Main{
+   private No primeiro;
+   private No ultimo;
+   private String nomeDaLista;
+
+  public Main(String nome) {
+
+  nomeDaLista = nome;
+
+
+  primeiro = ultimo = null;
+  }
+
+  public Main() {
+  nomeDaLista = "Valdemir AirLines";
+  primeiro = ultimo = null;
+  }
+
+  public void InsereNaFrente(String item) {
+   if (Vazia())
+   primeiro = ultimo = new No(item);
+   else
+   primeiro = new No(item, primeiro);
+  }
+
+  public void InsereNoFundo(String item) {
+   if (Vazia())
+   primeiro = ultimo = new No(item);
+   else
+  {
+   ultimo.setProx(new No(item));
+  ultimo = ultimo.getProx();
+  }
+  }
+
+ public String RemoveDaFrente() {
+  if (Vazia())
+  {
+  return null;
+  }
+  String item = primeiro.getDado();
+  if (primeiro == ultimo)
+  primeiro = ultimo = null;
+
+  else
+  primeiro = primeiro.getProx();
+  return item;
+  }
+  public String RemoveDoFundo() {
+  if (Vazia()){
+  return null;
+  }
+  String item = ultimo.getDado();
+  if (primeiro == ultimo)
+  primeiro = ultimo = null;
+  else {
+  No atual = primeiro;
+  while (atual.getProx() != ultimo)
+  atual = atual.getProx();
+  ultimo = atual;
+  atual.setProx(null);
+  }
+  return item;
+  }  
+  public boolean Vazia() {
+  return primeiro == null;
+  } 
+  public String EscreveLista() {
+   String temp = "";
+   if (Vazia()) {
+   temp += "Vazia " + nomeDaLista;
+   return temp;
+   }
+
+   temp += "O voo 069 da " + nomeDaLista + " contem \n\n";
+   No atual = primeiro;
+   while (atual != null) {
+   temp += atual.getDado() + ", ";
+   atual = atual.getProx();
+   }
+
+   temp += "\n";
+   return temp;
+  }
+   public String exibePrim() {
+  if (primeiro == null) return "Primeiro: null";
+
+  else return "Primeiro: " + primeiro.getDado();
+
+}
+public String exibeUlt() {
+if (ultimo == null) return "Ultimo: null";
+else return "Ultimo: " + ultimo.getDado();
+}
+
+  public static void main( String[] args) {
+  Main l1 = new Main();
+
+  l1.InsereNaFrente("Cleber");
+  l1.InsereNaFrente("Junior");
+  l1.InsereNaFrente("Lazaro");
+  l1.InsereNaFrente("Jailson");
+  l1.InsereNoFundo("Flavio");
+  System.out.print(l1.EscreveLista());
+  l1.RemoveDaFrente();
+  l1.RemoveDoFundo();
+  System.out.print(l1.EscreveLista());
+}
+}
